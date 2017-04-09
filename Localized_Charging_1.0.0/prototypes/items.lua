@@ -19,4 +19,42 @@ data:extend({
 		order = "a[train-system]-f[electric-locomotive]",
 		place_result = "electric-locomotive",
 	}),
+	
+	{
+		type = "item",
+		name = "test-battery-please-ignore",
+		icon = "__base__/graphics/icons/battery-mk2-equipment.png",
+		placed_as_equipment_result = "test-battery-please-ignore",
+		flags = {"goes-to-main-inventory"},
+		subgroup = "equipment",
+		order = "c[battery]-b[test-battery-please-ignore]",
+		stack_size = 50,
+		default_request_amount = 10
+	},
+	{
+		type = "battery-equipment",
+		name = "test-battery-please-ignore",
+		sprite =
+		{
+			filename = "__base__/graphics/equipment/battery-mk2-equipment.png",
+			width = 32,
+			height = 64,
+			priority = "medium"
+		},
+		shape =
+		{
+			width = 1,
+			height = 2,
+			type = "full"
+		},
+		energy_source =
+		{
+			type = "electric",
+			buffer_capacity = "30GJ",
+			input_flow_limit = "1GW",
+			output_flow_limit = "1GW",
+			usage_priority = "terciary"
+		},
+		categories = {"armor"}
+	},
 })

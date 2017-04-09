@@ -4,7 +4,7 @@
 	"version": "1.0.0",
 	"title": "Localized_Charging",
 	"author": "Sirenfal",
-	"description": "Wireless electricity mod",
+	"description": "A charging mod that will recharge batteries in vehicles and power armor when near a charging pole.",
 	"dependencies": ["base >= 0.14.0"],
 	"factorio_version": "0.14.0"
 }

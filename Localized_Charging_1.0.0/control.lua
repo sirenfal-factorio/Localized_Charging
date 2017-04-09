@@ -110,7 +110,7 @@ script.on_event(defines.events.on_tick, function(event)
 				}
 
 				for name, info in pairs(charging_info) do
-					for _, tower in pairs(game.surfaces[1].find_entities_filtered{
+					for _, tower in pairs(vehicle.surface.find_entities_filtered{
 						area={
 							{vehicle.position['x'] - info['range'], vehicle.position['y'] - info['range']},
 							{vehicle.position['x'] + info['range'], vehicle.position['y'] + info['range']},
@@ -149,7 +149,7 @@ script.on_event(defines.events.on_tick, function(event)
 				}
 
 				for name, info in pairs(charging_info) do
-					for _, tower in pairs(game.surfaces[1].find_entities_filtered{
+					for _, tower in pairs(player.surface.find_entities_filtered{
 						area={
 							{player.position['x'] - info['range'], player.position['y'] - info['range']},
 							{player.position['x'] + info['range'], player.position['y'] + info['range']},
@@ -178,8 +178,8 @@ script.on_event(defines.events.on_tick, function(event)
 		local item = table.remove(items, 1)
 
 		if(item == nil) then -- wat
-			game.print('Voltage: this should never happen: no chargable items?')
-			error('Voltage: this should never happen: no chargable items?')
+			game.print('Localized Charging: this should never happen: no chargable items?')
+			error('Localized Charging: this should never happen: no chargable items?')
 		end
 
 		for _, tower in pairs(info.towers) do
@@ -187,24 +187,34 @@ script.on_event(defines.events.on_tick, function(event)
 			local interface = global.interfaces[tower.unit_number]
 
 			-- lightning effect
-			game.surfaces[1].create_entity{
+			tower.surface.create_entity{
 				name = "charging-charge",
 				position = {tower.position['x'], tower.position['y'] - 1.5},
 				force = info.ent.force,
 				target = info.ent
 			}
 
+			local s = split[tower.unit_number]
+
+			if(s == nil or s < 1) then
+				error('Localized Charging: invalid tower split: ' .. tostring(s))
+			end
+
+			-- use ceil here to counter float imprecision
+			local transfer = interface.energy / s --math.ceil(math.min(item.max_energy - item.energy, interface.energy / s))
+
+			-- we've partitioned off the energy we need
+			split[tower.unit_number] = split[tower.unit_number] - 1
+
 			repeat
-				local s = split[tower.unit_number]
-
-				if(s == nil or s < 1) then
-					error('Voltage: invalid tower split: ' .. tostring(s))
-				end
-
-				-- use ceil here to counter float imprecision
-				local transfer = math.ceil(math.min(item.max_energy - item.energy, interface.energy / s))
-				interface.energy = interface.energy - transfer
+				local spent = item.energy
 				item.energy = item.energy + math.ceil(transfer * power_info.efficiency)
+				spent = (item.energy - spent) * (1 / power_info.efficiency)
+
+				-- game.print(string.format('transferring %f to %i (split: %i, pool: %f, interface: %f)', spent, info.ent.unit_number, s, transfer, interface.energy))
+
+				transfer = transfer - spent
+				interface.energy = interface.energy - spent
 
 				if(item.max_energy - item.energy < 1) then
 					-- charge the next item
@@ -215,19 +225,21 @@ script.on_event(defines.events.on_tick, function(event)
 						break
 					end
 				end
-			until interface.energy < 1
+			until transfer < 1
 
 			if(item == nil) then
 				break
 			end
 		end
 	end
+
+	-- game.print('-----')
 end)
 
 local function on_entity_created(entity)
 	if(charging_info[entity.name] ~=  nil) then
 		local uid = entity.unit_number
-		local interface = game.surfaces[1].create_entity{
+		local interface = entity.surface.create_entity{
 			name = "localized-charging-pole-interface",
 			position = {entity.position['x'], entity.position['y']},
 			-- stop ai in everything mode from attacking this invulnerable building
