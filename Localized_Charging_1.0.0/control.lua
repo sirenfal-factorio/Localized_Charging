@@ -200,14 +200,14 @@ script.on_event(defines.events.on_tick, function(event)
 				error('Localized Charging: invalid tower split: ' .. tostring(s))
 			end
 
-			-- use ceil here to counter float imprecision
-			local transfer = interface.energy / s --math.ceil(math.min(item.max_energy - item.energy, interface.energy / s))
+			local transfer = interface.energy / s
 
 			-- we've partitioned off the energy we need
 			split[tower.unit_number] = split[tower.unit_number] - 1
 
 			repeat
 				local spent = item.energy
+				-- use ceil here to counter float imprecision
 				item.energy = item.energy + math.ceil(transfer * power_info.efficiency)
 				spent = (item.energy - spent) * (1 / power_info.efficiency)
 
