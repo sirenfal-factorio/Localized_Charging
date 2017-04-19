@@ -28,15 +28,6 @@ local charging_info = {
 	},
 }
 
---Check for the presence of AAI Programmable Vehicles
-local aaipv_present = false
-for interface_name, _ in pairs(remote.interfaces) do
-	if(interface_name == 'aai-programmable-vehicles') then
-		aaipv_present = true
-		break
-	end
-end
-
 local electric_vehicles = {
 	['electric-locomotive'] = true,
 	-- airship mod lol
@@ -67,7 +58,7 @@ remote.add_interface('Localized_Charging', {
 			local vehicle = vehicle_info.vehicle
 			if(vehicle == event.old_entity) then
 				global.vehicles[k]['vehicle'] = event.new_entity
-				if(aaipv_present) and (remote.call('aai-programmable-vehicles', 'get_unit_by_entity', vehicle) ~= nil) then
+				if(remote.call('aai-programmable-vehicles', 'get_unit_by_entity', vehicle) ~= nil) then
 					--AAIPV uses a special fueling method, so disable regular battery fueling
 					global.vehicles[k]['battery_fueling_enabled'] = false
 				end
