@@ -58,7 +58,7 @@ remote.add_interface('Localized_Charging', {
 			local vehicle = vehicle_info.vehicle
 			if(vehicle == event.old_entity) then
 				global.vehicles[k]['vehicle'] = event.new_entity
-				if(remote.call('aai-programmable-vehicles', 'get_unit_by_entity', vehicle) ~= nil) then
+				if(remote.interfaces['aai-programmable-vehicles']) and (remote.call('aai-programmable-vehicles', 'get_unit_by_entity', vehicle) ~= nil) then
 					--AAIPV uses a special fueling method, so disable regular battery fueling
 					global.vehicles[k]['battery_fueling_enabled'] = false
 				end
