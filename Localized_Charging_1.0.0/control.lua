@@ -28,6 +28,15 @@ local charging_info = {
 	},
 }
 
+--Check for the presence of AAI Programmable Vehicles
+local aaipv_present = false
+for interface_name, _ in pairs(remote.interfaces) do
+	if(interface_name == 'aai-programmable-vehicles') then
+		aaipv_present = true
+		break
+	end
+end
+
 local electric_vehicles = {
 	['electric-locomotive'] = true,
 	-- airship mod lol
@@ -38,6 +47,35 @@ local electric_vehicles = {
 	-- predictabowl vehicle mammoth tank
 	['tank-mk3'] = true,
 }
+
+remote.add_interface('Localized_Charging', {
+	--Allow other mods to add electric vehicles
+	add_electric_vehicle = function(name)
+		if (electric_vehicles[name] ~= nil) then
+			return true
+		end
+		local vehicle = game.entity_prototypes[name]
+		if (vehicle ~= nil) and ((vehicle.type == 'car') or (vehicle.type == 'locomotive')) then
+				electric_vehicles[name] = true
+				return true
+		end
+		return false
+	end,
+    --Handle entity replacement by AAI Programmable Vehicles
+	on_entity_replaced = function(event)
+		for k, vehicle_info in pairs(global.vehicles) do
+			local vehicle = vehicle_info.vehicle
+			if(vehicle == event.old_entity) then
+				global.vehicles[k]['vehicle'] = event.new_entity
+				if(aaipv_present) and (remote.call('aai-programmable-vehicles', 'get_unit_by_entity', vehicle) ~= nil) then
+					--AAIPV uses a special fueling method, so disable regular battery fueling
+					global.vehicles[k]['battery_fueling_enabled'] = false
+				end
+				break
+			end
+		end
+	end
+})
 
 local function defaultdict(d)
 	t = {}
@@ -71,7 +109,7 @@ script.on_event(defines.events.on_tick, function(event)
 
 		if(not vehicle.valid) then
 			table.insert(remove, k)
-		elseif(vehicle.grid ~= nil) then
+		elseif(vehicle.grid ~= nil) and (vehicle_info.battery_fueling_enabled) then
 			local grid = vehicle.grid
 			local available_power = grid.available_in_batteries
 			local current_power = vehicle.energy
@@ -271,6 +309,7 @@ local function on_entity_created(entity)
 		-- cars, etc can't be paused by event because there's no way to detect their inventory changing as it happens (no event)
 		table.insert(global.vehicles, {
 			['vehicle'] = entity,
+			['battery_fueling_enabled'] = true,
 			['charging'] = false,
 			-- the last time the grid was scanned for non-empty batteries
 			['lastCheck'] = 0,
