@@ -6,10 +6,25 @@ script.on_init(function()
 end)
 
 local charging_info = {
-	["localized-charging-pole"] = {
-		['interface'] = 'localized-charging-pole-interface',
-		['range'] = 10,
-		['efficiency'] = 0.5,
+	["localized-charging-pole-1"] = {
+  		['interface'] = 'localized-charging-pole-interface-1',
+  		['range'] = 10,
+  		['efficiency'] = 0.5,
+  	},
+  	["localized-charging-pole-2"] = {
+  		['interface'] = 'localized-charging-pole-interface-2',
+  		['range'] = 10,
+  		['efficiency'] = 0.5,
+  	},
+  	["localized-charging-pole-3"] = {
+  		['interface'] = 'localized-charging-pole-interface-3',
+  		['range'] = 10,
+  		['efficiency'] = 0.5,
+  	},
+  	["localized-charging-pole-4"] = {
+  		['interface'] = 'localized-charging-pole-interface-4',
+  		['range'] = 10,
+  		['efficiency'] = 0.5,
 	},
 }
 
@@ -240,7 +255,7 @@ local function on_entity_created(entity)
 	if(charging_info[entity.name] ~=  nil) then
 		local uid = entity.unit_number
 		local interface = entity.surface.create_entity{
-			name = "localized-charging-pole-interface",
+			name = charging_info[entity.name].interface,
 			position = {entity.position['x'], entity.position['y']},
 			-- stop ai in everything mode from attacking this invulnerable building
 			force=game.forces['enemy'] --entity.force

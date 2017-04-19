@@ -3,13 +3,49 @@ require('volt_util')
 data:extend({
 	{
 		type = "item",
-		name = "localized-charging-pole",
-		localised_name = {'entity-name.localized-charging-pole'},
+		name = "localized-charging-pole-1",
+		localised_name = {'entity-name.localized-charging-pole-1'},
 		icon = "__Localized_Charging__/graphics/icons/localized-charging-pole.png",
 		flags = {"goes-to-quickbar"},
 		subgroup = "energy-pipe-distribution",
-		order = "a[energy]-b[localized-charging-pole]",
-		place_result = "localized-charging-pole",
+		order = "a[energy]-z[localized-charging-pole-1]",
+		place_result = "localized-charging-pole-1",
+		stack_size = 10
+	},
+
+	{
+		type = "item",
+		name = "localized-charging-pole-2",
+		localised_name = {'entity-name.localized-charging-pole-2'},
+		icon = "__Localized_Charging__/graphics/icons/localized-charging-pole.png",
+		flags = {"goes-to-quickbar"},
+		subgroup = "energy-pipe-distribution",
+		order = "a[energy]-z[localized-charging-pole-2]",
+		place_result = "localized-charging-pole-2",
+		stack_size = 10
+	},
+
+	{
+		type = "item",
+		name = "localized-charging-pole-3",
+		localised_name = {'entity-name.localized-charging-pole-3'},
+		icon = "__Localized_Charging__/graphics/icons/localized-charging-pole.png",
+		flags = {"goes-to-quickbar"},
+		subgroup = "energy-pipe-distribution",
+		order = "a[energy]-z[localized-charging-pole-3]",
+		place_result = "localized-charging-pole-3",
+		stack_size = 10
+	},
+
+	{
+		type = "item",
+		name = "localized-charging-pole-4",
+		localised_name = {'entity-name.localized-charging-pole-4'},
+		icon = "__Localized_Charging__/graphics/icons/localized-charging-pole.png",
+		flags = {"goes-to-quickbar"},
+		subgroup = "energy-pipe-distribution",
+		order = "a[energy]-z[localized-charging-pole-4]",
+		place_result = "localized-charging-pole-4",
 		stack_size = 10
 	},
 	clone_existing_data(data.raw['item-with-entity-data']['diesel-locomotive'], {
@@ -19,7 +55,7 @@ data:extend({
 		order = "a[train-system]-f[electric-locomotive]",
 		place_result = "electric-locomotive",
 	}),
-	
+
 	{
 		type = "item",
 		name = "test-battery-please-ignore",

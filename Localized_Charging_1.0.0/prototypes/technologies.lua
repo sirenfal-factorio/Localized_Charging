@@ -29,8 +29,20 @@ data:extend({
 		effects = {
 			{
 				type = "unlock-recipe",
-				recipe = "localized-charging-pole",
-			}
+				recipe = "localized-charging-pole-1",
+			},
+			{
+				type = "unlock-recipe",
+				recipe = "localized-charging-pole-2",
+			},
+			{
+				type = "unlock-recipe",
+				recipe = "localized-charging-pole-3",
+			},
+			{
+				type = "unlock-recipe",
+				recipe = "localized-charging-pole-4",
+			}, 
 		},
 		prerequisites = {"electric-energy-distribution-2"},
 		unit = {

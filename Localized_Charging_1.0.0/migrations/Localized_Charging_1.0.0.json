@@ -1,0 +1,12 @@
+{
+    "entity":
+    [
+        ["localized-charging-pole-interface", "localized-charging-pole-interface-4"],
+        ["localized-charging-pole", "localized-charging-pole-4"]
+    ],
+
+    "item":
+    [
+        ["localized-charging-pole", "localized-charging-pole-4"]
+    ]
+}
