@@ -38,7 +38,7 @@ data:extend({
 		localised_name = {'entity-name.localized-charging-pole-1'},
 		collision_box = {{-0.65, -0.65}, {0.65, 0.65}},
 		flags = {"not-blueprintable", "not-deconstructable", "not-on-map", "placeable-off-grid"},
-		max_health = 0,
+		max_health = 1, -- At least you made it invulnerable in the script.
 		corpse = "medium-remnants",
 		collision_mask = {},
 		energy_source =
@@ -66,7 +66,7 @@ data:extend({
 		localised_name = {'entity-name.localized-charging-pole-2'},
 		collision_box = {{-0.65, -0.65}, {0.65, 0.65}},
 		flags = {"not-blueprintable", "not-deconstructable", "not-on-map", "placeable-off-grid"},
-		max_health = 0,
+		max_health = 1,
 		corpse = "medium-remnants",
 		collision_mask = {},
 		energy_source =
@@ -94,7 +94,7 @@ data:extend({
 		localised_name = {'entity-name.localized-charging-pole-3'},
 		collision_box = {{-0.65, -0.65}, {0.65, 0.65}},
 		flags = {"not-blueprintable", "not-deconstructable", "not-on-map", "placeable-off-grid"},
-		max_health = 0,
+		max_health = 1,
 		corpse = "medium-remnants",
 		collision_mask = {},
 		energy_source =
@@ -122,7 +122,7 @@ data:extend({
 		localised_name = {'entity-name.localized-charging-pole-4'},
 		collision_box = {{-0.65, -0.65}, {0.65, 0.65}},
 		flags = {"not-blueprintable", "not-deconstructable", "not-on-map", "placeable-off-grid"},
-		max_health = 0,
+		max_health = 1,
 		corpse = "medium-remnants",
 		collision_mask = {},
 		energy_source =
