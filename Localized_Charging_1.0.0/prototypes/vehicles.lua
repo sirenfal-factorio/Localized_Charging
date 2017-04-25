@@ -9,7 +9,7 @@ data:extend({
 		height = 10,
 		equipment_categories = {"armor"},
 	},
-	clone_existing_data(data.raw.locomotive['diesel-locomotive'], {
+	clone_existing_data(data.raw.locomotive['locomotive'], {
 		name='electric-locomotive',
 		localised_name={'vehicles.electric-locomotive'},
 		icon = "__Localized_Charging__/graphics/icons/electric-locomotive.png",

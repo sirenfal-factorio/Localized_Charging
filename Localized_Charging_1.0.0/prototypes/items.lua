@@ -48,7 +48,7 @@ data:extend({
 		place_result = "localized-charging-pole-4",
 		stack_size = 10
 	},
-	clone_existing_data(data.raw['item-with-entity-data']['diesel-locomotive'], {
+	clone_existing_data(data.raw['item-with-entity-data']['locomotive'], {
 		name = "electric-locomotive",
 		localised_name={'vehicles.electric-locomotive'},
 		icon = "__Localized_Charging__/graphics/icons/electric-locomotive.png",
