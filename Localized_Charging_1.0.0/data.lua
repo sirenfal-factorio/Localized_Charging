@@ -1,5 +1,0 @@
-require('prototypes.items')
-require('prototypes.recipes')
-require('prototypes.charger')
-require('prototypes.vehicles')
-require('prototypes.technologies')
