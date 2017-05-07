@@ -46,7 +46,7 @@ data:extend({
 			type = "electric",
 			buffer_capacity = (((charging_output / 8) * scan_tick) / 60) .. 'MJ',
 			usage_priority = "secondary-input",
-			input_flow_limit = ((charging_output / 8) * scan_tick) .. 'MW',
+			input_flow_limit = ((charging_output / 8) * scan_tick / 60) .. 'MW',
 			output_flow_limit = "0W"
 		},
 		energy_production = "0W",
@@ -74,7 +74,7 @@ data:extend({
 			type = "electric",
 			buffer_capacity = (((charging_output / 4) * scan_tick) / 60) .. 'MJ',
 			usage_priority = "secondary-input",
-			input_flow_limit = ((charging_output / 4) * scan_tick) .. 'MW',
+			input_flow_limit = ((charging_output / 4) * scan_tick / 60) .. 'MW',
 			output_flow_limit = "0W"
 		},
 		energy_production = "0W",
@@ -102,7 +102,7 @@ data:extend({
 			type = "electric",
 			buffer_capacity = (((charging_output / 2) * scan_tick) / 60) .. 'MJ',
 			usage_priority = "secondary-input",
-			input_flow_limit = ((charging_output / 2) * scan_tick) .. 'MW',
+			input_flow_limit = ((charging_output / 2) * scan_tick / 60) .. 'MW',
 			output_flow_limit = "0W"
 		},
 		energy_production = "0W",
@@ -130,7 +130,7 @@ data:extend({
 			type = "electric",
 			buffer_capacity = ((charging_output * scan_tick) / 60) .. 'MJ',
 			usage_priority = "secondary-input",
-			input_flow_limit = (charging_output * scan_tick) .. 'MW',
+			input_flow_limit = (charging_output * scan_tick / 60) .. 'MW',
 			output_flow_limit = "0W"
 		},
 		energy_production = "0W",
