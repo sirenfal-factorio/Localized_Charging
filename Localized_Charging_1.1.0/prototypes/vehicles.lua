@@ -22,10 +22,7 @@ data:extend({
 		order="electric-locomotive",
 		equipment_grid = "voltage-electric-locomotive",
 		equipment_categories = {"armor"},
-		energy_source =
-		{
-			type = "burner",
-			effectivity = 1,
+		burner = {
 			fuel_inventory_size = 0,
 		},
 		front_light = {
