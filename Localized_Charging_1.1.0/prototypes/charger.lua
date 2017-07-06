@@ -1,6 +1,6 @@
 require('constants')
 
--- in megawatts per second
+-- in megajoules per second
 local charging_output = 40
 
 data:extend({
